@@ -1,61 +1,86 @@
 Plant Leaf Disease Detection using CNN
 -Project Overview
 
-This project focuses on automatic classification of plant leaf diseases using image-based deep learning techniques. The system analyzes images of plant leaves and identifies whether they are healthy or affected by a specific disease.
+This project is about developing a computer vision model that can detect and classify plant leaf diseases from images.
 
-The goal is to support farmers and agricultural experts by providing a fast, cost-effective, and accurate tool for early disease detection, which helps in improving crop yield and reducing losses.
+Agriculture depends heavily on plant health, and farmers often struggle to identify diseases early. Manual inspection is not always reliable and requires expert knowledge, which is not available everywhere.
 
-🔍 Problem Statement
+The purpose of this project is to build an automated system that takes a plant leaf image as input and predicts whether the leaf is healthy or infected, along with the type of disease if infected.
 
-Traditional disease detection in crops depends on manual inspection.
+This project demonstrates how image classification can be applied in the agricultural domain to improve productivity, reduce pesticide misuse, and support farmers in decision-making.
 
-It is time-consuming, costly, and prone to error.
+-Problem Statement
 
-Lack of timely diagnosis leads to reduced productivity and financial losses.
+Farmers often face crop loss due to late detection of diseases.
 
-An automated solution is required to make disease classification scalable, reliable, and efficient.
+Manual methods require experts, are slow, and may not be accurate at scale.
+
+A fast, scalable solution is needed for real-time disease detection.
 
 -Objectives
 
-Build a deep learning-based image classification system for plant diseases.
+Create a deep learning model to classify leaf images into multiple disease categories.
 
-Train and evaluate a CNN model on multi-class crop datasets.
+Train and validate the model on large, diverse datasets.
 
-Provide an easy-to-use interface for users to upload leaf images and receive predictions.
+Provide a user-friendly interface where users can upload an image and instantly get predictions.
 
-Achieve high accuracy with reduced false detections.
+Achieve high accuracy and fast inference time so the solution can be practical.
 
 ⚙️ Technologies Used
 
 Programming Language: Python
 
-Frameworks/Libraries: PyTorch, TensorFlow/Keras, Albumentations, OpenCV, NumPy, Pandas, Matplotlib, Seaborn, Scikit-Learn
+Deep Learning Frameworks: PyTorch, TensorFlow/Keras
 
-Interface: Gradio
+Supporting Libraries: NumPy, Pandas, OpenCV, Albumentations, Matplotlib, Seaborn, Scikit-learn
 
-Tools: Jupyter Notebook, GitHub
+Interface: Gradio (for simple web-based predictions)
 
-Combined to cover 40+ plant diseases across multiple species.
+Development Tools: Jupyter Notebook, Google Colab, GitHub
 
-Publicly available on Kaggle PlantVillage
+-Together covering 40+ disease categories across multiple plant species.
+-The dataset was cleaned and preprocessed:
+
+Resized to standard dimensions.
+
+Normalized for pixel scaling.
+
+Augmented using Albumentations (rotation, flip, brightness, zoom) to make the model robust.
+
+Reference: PlantVillage Dataset on Kaggle
 
 🛠 System Design
-Data Preprocessing: Image resizing, normalization, augmentation (rotation, brightness, flipping).
+1. Preprocessing
 
-Model Architecture:
+Data organized into train, validation, and test sets.
 
-Dual-branch model combining a custom CNN and pretrained ResNet34.
+Augmentation applied to reduce overfitting and improve generalization.
 
-Feature fusion for improved classification performance.
+2. Model Architecture
+Dual-Branch Model:
 
-Training:
+Branch 1: Custom CNN with convolution + pooling layers.
+
+Branch 2: Pretrained ResNet34 for transfer learning.
+
+Outputs from both branches were combined (feature fusion) and fed into fully connected layers for classification.
+
+3. Training Setup
 Optimizer: AdamW
 
 Loss Function: CrossEntropyLoss
 
-Techniques: Label smoothing, early stopping, mixed precision training
+Batch Size: 16
 
-Evaluation: Accuracy, confusion matrix, and classification reports.
+Epochs: 20+
+
+Techniques: label smoothing, mixed precision training, learning rate scheduler, early stopping
+
+4. Evaluation
+Metrics: Accuracy, Confusion Matrix, Precision, Recall, F1-score
+
+Visualization: Training/validation accuracy graphs, loss curves
 
 📊 Results
 Training Accuracy: ~94%
@@ -64,22 +89,34 @@ Validation Accuracy: ~89%
 
 Test Accuracy: ~87%
 
-Inference Speed: 0.1 sec per image
+Inference Speed: ~0.1 sec per image
 
--Key Features
-Multi-class plant disease detection.
+The model was able to classify diseases such as early blight, late blight, powdery mildew, leaf spot, rust, and more with strong accuracy.
 
-Robust model using CNN + ResNet34.
+Training/validation accuracy graphs
 
-High accuracy with optimized training pipeline.
+Confusion matrix visualization
 
-Simple Gradio interface for real-time predictions.
+GUI interface (Gradio screenshot)
 
--Future Scope
-Deploy on mobile and edge devices for offline usage.
+Example predictions on sample images
 
-Integrate with drone imagery and IoT sensors.
+-Features
+Multi-class classification (healthy + 40+ disease types).
 
-Expand datasets for more crops and disease types.
+Dual-branch CNN + ResNet34 architecture for better feature learning.
 
-Model optimization with pruning/quantization for faster inference.
+Augmented dataset for robustness.
+
+User-friendly interface for image upload and instant results.
+
+Public GitHub repo for code and documentation.
+
+-Future Improvements
+Optimize the model using pruning and quantization to make it deployable on mobile/IoT devices.
+
+Extend the system for real-time drone imagery in large farms.
+
+Support multiple languages in the interface for rural accessibility.
+
+Expand dataset to cover more crops and region-specific diseases.
